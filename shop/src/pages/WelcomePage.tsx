@@ -1,4 +1,3 @@
-import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 import '../App.css';
 import ProductBox from '../components/productBox.tsx';
 import Data from '../data/data.ts';
