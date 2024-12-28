@@ -28,6 +28,7 @@
   width: 100%;
   padding: 20px;
   text-align: center;
+  opacity: 0;
 }
 
 .product-list {
@@ -36,4 +37,13 @@
   align-items: center;
   gap: 20px;
   margin-top: 20px;
+}
+
+
+.start{
+  opacity: 0;
+}
+.end{
+  opacity: 1;
+  transition: opacity 0.5s;
 }

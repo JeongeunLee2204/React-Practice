@@ -6,6 +6,7 @@ function DetailPage(props) {
   const { id } = useParams();
   const numericId = parseInt(id, 10);
   const [tab, setTab] = useState(0);
+  const [fade2, setFade2] = useState("start");
 
   const product = props.pData.find((item) => item.id === numericId);
 
@@ -14,13 +15,14 @@ function DetailPage(props) {
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      console.log("5초 지남");
-    }, 5000);
+    const timeout = setTimeout(() => {
+      setFade2("end");
+    }, 100);
+    return () => clearTimeout(timeout);
   }, []);
 
   return (
-    <div className="container">
+    <div className={`container ${fade2}`}>
       <div className="row">
         <div className="col-md-6">
           <img
@@ -63,9 +65,18 @@ function DetailPage(props) {
 export default DetailPage;
 
 function TabContent({ tab }) {
-  return [
-    <div>상품 설명 내용입니다.</div>,
-    <div>리뷰 내용입니다.</div>,
-    <div>Q&A 내용입니다.</div>,
-  ][tab];
+  const [fade, setFade] = useState("start");
+
+  useEffect(() => {
+    setFade("start");
+    const timeout = setTimeout(() => setFade("end"), 100);
+    
+    return () => clearTimeout(timeout);
+  }, [tab]);
+
+  return (
+    <div className={`start ${fade}`}>
+      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]}
+    </div>
+  );
 }

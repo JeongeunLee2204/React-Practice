@@ -13,7 +13,7 @@ function App() {
         <Container>
           <Navbar.Brand href="/">Elephant Shop</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="/detail/:id">Detail</Nav.Link>
+          <Nav.Link href={`/detail/${pData[0].id}`}>Detail</Nav.Link>
             <Nav.Link href="/event">Event</Nav.Link>
           </Nav>
         </Container>
