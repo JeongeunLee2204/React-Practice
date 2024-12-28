@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Nav } from "react-bootstrap";
+import { addItem } from "./../data/store";
+import { useDispatch } from "react-redux";
 
 function DetailPage(props) {
   const { id } = useParams();
   const numericId = parseInt(id, 10);
   const [tab, setTab] = useState(0);
   const [fade2, setFade2] = useState("start");
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); 
 
   const product = props.pData.find((item) => item.id === numericId);
 
@@ -34,7 +38,22 @@ function DetailPage(props) {
           <h4 className="pt-5">{product.title}</h4>
           <p>{product.content}</p>
           <p>{product.price}원</p>
-          <button className="btn btn-danger">주문하기</button>
+          <button
+            className="btn btn-danger"
+            onClick={() => {
+              dispatch(
+                addItem({
+                  id: product.id,
+                  name: product.title,
+                  count: 1,
+                })
+              );
+              console.log("주문됨");
+              navigate("/cart");
+            }}
+          >
+            주문하기
+          </button>
         </div>
       </div>
 
@@ -63,6 +82,7 @@ function DetailPage(props) {
 }
 
 export default DetailPage;
+
 
 function TabContent({ tab }) {
   const [fade, setFade] = useState("start");
