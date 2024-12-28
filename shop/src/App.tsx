@@ -3,11 +3,17 @@ import WelcomePage from './pages/WelcomePage';
 import DetailPage from './pages/DetailPage';
 import CartPage from './pages/CartPage';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Data from './data/data';
 
 function App() {
   const [pData] = useState(Data);
+
+  useEffect(() => {
+    if (!localStorage.getItem('watched')) {
+        localStorage.setItem('watched', JSON.stringify([]));
+    }
+}, []);
 
   return (
     <div className="App">

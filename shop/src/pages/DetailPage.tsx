@@ -21,9 +21,18 @@ function DetailPage(props) {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setFade2("end");
+      let copy = JSON.parse(localStorage.getItem('watched'))
+      copy.find((a) => a === product.id)
+        ? null
+        : localStorage.setItem('watched', JSON.stringify([...copy, product.id])); 
     }, 100);
     return () => clearTimeout(timeout);
   }, []);
+
+  let watched = JSON.parse(localStorage.getItem('watched'));
+console.log(watched); // [1, 2, 3]
+
+  
 
   return (
     <div className={`container ${fade2}`}>
